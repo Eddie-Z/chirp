@@ -4,26 +4,26 @@ import { api } from "~/utils/api";
 import { PageLayout } from "~/components/layout";
 import Image from "next/image";
 import { LoadingPage } from "~/components/loading";
-import { PostView } from "~/components/postview";
+// import { PostView } from "~/components/postview";
 import { generateSSGHelper } from "~/server/helpers/ssgHelper";
 
-const ProfileFeed = (props: { userId: string }) => {
-  const { data, isLoading } = api.posts.getPostsByUserId.useQuery({
-    userId: props.userId,
-  });
+// const ProfileFeed = (props: { userId: string }) => {
+//   const { data, isLoading } = api.posts.getPostsByUserId.useQuery({
+//     userId: props.userId,
+//   });
 
-  if (isLoading) return <LoadingPage />;
+//   if (isLoading) return <LoadingPage />;
 
-  if (!data || data.length === 0) return <div>User has not posted</div>;
+//   if (!data || data.length === 0) return <div>User has not posted</div>;
 
-  return (
-    <div className="flex flex-col">
-      {data.map((fullPost) => (
-        <PostView {...fullPost} key={fullPost.post.id} />
-      ))}
-    </div>
-  );
-};
+//   return (
+//     <div className="flex flex-col">
+//       {data.map((fullPost) => (
+//         // <PostView {...fullPost} key={fullPost.post.id} />
+//       ))}
+//     </div>
+//   );
+// };
 
 const ProfilePage: NextPage<{ username: string }> = ({ username }) => {
   const { data } = api.profile.getUserByUsername.useQuery({
@@ -49,7 +49,7 @@ const ProfilePage: NextPage<{ username: string }> = ({ username }) => {
         <div className="p-4 text-2xl font-bold">{`@${data.username ?? data.externalUsername
           }`}</div>
         <div className="w-full border-b border-slate-400" />
-        <ProfileFeed userId={data.id} />
+        {/* <ProfileFeed userId={data.id} /> */}
       </PageLayout>
     </>
   );
